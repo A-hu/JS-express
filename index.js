@@ -10,6 +10,6 @@ app.get('/api/courses', (req, res) => {
   res.send([1, 2,3 ]);
 });
 
-app.listen(3001, () => {
-  console.log('Listening on port 3001...');
-});
+// PORT: export PORT=xxxx in terminal
+const port = process.env.PORT || 3001;
+app.listen(port, () => { console.log(`Listening on port ${port}...`); });
