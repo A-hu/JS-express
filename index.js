@@ -1,3 +1,5 @@
+// DEBUG=app:* nodemon
+const debug = require('debug')('app:startup');
 const config = require('config');
 const Joi = require('joi');
 const helmet = require('helmet'); // Helps secure your apps by setting various HTTP headers.
@@ -24,7 +26,7 @@ console.log('Mail Password:  ' + config.get('mail.passowrd'));
 
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
-  console.log('Morgan enabled...');
+  debug('Morgan enabled...');
 }
 
 app.use(logger);
