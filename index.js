@@ -6,11 +6,20 @@ const authentication = require('./authentication');
 const express = require('express');
 const app = express();
 
+// Environment
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`app: ${app.get('env')}`);
+
 app.use(express.json()); // req.body
 app.use(express.urlencoded({ extended: true })); // key1=value1&key2=value2
 app.use(express.static('public')); // localhost/readme.txt
 app.use(helmet()); // https://github.com/helmetjs/helmet
-app.use(morgan('tiny')); // https://expressjs.com/en/resources/middleware/morgan.html
+// app.use(morgan('tiny')); // https://expressjs.com/en/resources/middleware/morgan.html
+
+if (app.get('env') === 'development') {
+  app.use(morgan('tiny'));
+  console.log('Morgan enabled...');
+}
 
 app.use(logger);
 app.use(authentication);
