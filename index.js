@@ -1,3 +1,4 @@
+const config = require('config');
 const Joi = require('joi');
 const helmet = require('helmet'); // Helps secure your apps by setting various HTTP headers.
 const morgan = require('morgan'); // HTTP request logger
@@ -15,6 +16,11 @@ app.use(express.urlencoded({ extended: true })); // key1=value1&key2=value2
 app.use(express.static('public')); // localhost/readme.txt
 app.use(helmet()); // https://github.com/helmetjs/helmet
 // app.use(morgan('tiny')); // https://expressjs.com/en/resources/middleware/morgan.html
+
+// Configuration
+console.log('Application Name:  ' + config.get('name'));
+console.log('Mail Server:  ' + config.get('mail.host'));
+console.log('Mail Password:  ' + config.get('mail.passowrd'));
 
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
