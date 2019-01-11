@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 
 app.use(express.json()); // req.body
+app.use(express.urlencoded({ extended: true })); // key1=value1&key2=value2
+app.use(express.static('public')); // localhost/readme.txt
 
 app.use(logger);
 app.use(authentication);
