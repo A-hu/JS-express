@@ -9,6 +9,9 @@ const authentication = require('./authentication');
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './views'); // default
+
 // Environment
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`app: ${app.get('env')}`);
@@ -39,7 +42,7 @@ const courses = [
 ];
 
 app.get('/', (req, res) => {
-  res.send('Hello Express');
+  res.render('index', { title: 'Louis Express', message: 'Hello PUG' });
 });
 
 app.get('/api/courses', (req, res) => {
