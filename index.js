@@ -1,4 +1,6 @@
 const Joi = require('joi');
+const helmet = require('helmet'); // Helps secure your apps by setting various HTTP headers.
+const morgan = require('morgan'); // HTTP request logger
 const logger  = require('./logger');
 const authentication = require('./authentication');
 const express = require('express');
@@ -7,6 +9,8 @@ const app = express();
 app.use(express.json()); // req.body
 app.use(express.urlencoded({ extended: true })); // key1=value1&key2=value2
 app.use(express.static('public')); // localhost/readme.txt
+app.use(helmet()); // https://github.com/helmetjs/helmet
+app.use(morgan('tiny')); // https://expressjs.com/en/resources/middleware/morgan.html
 
 app.use(logger);
 app.use(authentication);
